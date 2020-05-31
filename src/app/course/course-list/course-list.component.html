@@ -1,0 +1,22 @@
+<mat-accordion multi="true" *ngIf="courses.length > 0">
+  <mat-expansion-panel *ngFor="let course of courses">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ course.subject }}
+      </mat-panel-title>
+      <mat-panel-description
+        >Price: {{ course.price }} zł
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>
+      XDDD
+    </p>
+    <mat-action-row>
+      <button mat-button color="accent">EDIT</button>
+      <button mat-button color="accent">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="courses.length <= 0">
+  No courses added yet!
+</p>
