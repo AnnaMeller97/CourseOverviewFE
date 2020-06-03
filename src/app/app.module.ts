@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -14,6 +15,9 @@ import { from } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { CourseListComponent } from './course/course-list/course-list.component';
+import { AppRouteModule } from './app-route.module';
+import { TopicCreateComponent } from './course/topic/topic-create/topic-create.component';
+import { TopicListComponent } from './course/topic/topic-list/topic-list.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +25,11 @@ import { CourseListComponent } from './course/course-list/course-list.component'
     CourseCreateComponent,
     HeaderComponent,
     CourseListComponent,
+    TopicCreateComponent,
+    TopicListComponent,
   ],
   imports: [
+    AppRouteModule,
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -31,6 +38,7 @@ import { CourseListComponent } from './course/course-list/course-list.component'
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,
+    MatListModule,
     HttpClientModule,
   ],
   providers: [],

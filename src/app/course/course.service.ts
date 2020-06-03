@@ -13,7 +13,7 @@ export class CourseService {
 
   getCourses() {
     this.http
-      .get<Course[]>('http://localhost:8080/course')
+      .get<Course[]>('http://localhost:8080/courses')
       .subscribe((courseData) => {
         this.courses = courseData;
         this.coursesUpdated.next([...this.courses]);
@@ -25,9 +25,14 @@ export class CourseService {
     return this.coursesUpdated.asObservable();
   }
 
-  addCourse(id: number, subject: string, price: number) {
-    const course: Course = { id, subject, price };
-    this.courses.push(course);
-    this.coursesUpdated.next([...this.courses]);
+  addCourse(subject: string, price: number) {
+    const course: Course = { id: null, subject, price };
+    this.http
+      .post<Course>('http://localhost:8080/course', course)
+      .subscribe((responseData) => {
+        this.courses.push(course);
+        this.coursesUpdated.next([...this.courses]);
+        window.location.href = 'http://localhost:4200';
+      });
   }
 }

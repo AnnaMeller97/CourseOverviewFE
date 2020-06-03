@@ -1,5 +1,9 @@
-<mat-accordion multi="true" *ngIf="courses.length > 0">
-  <mat-expansion-panel *ngFor="let course of courses">
+<mat-accordion *ngIf="courses.length > 0">
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+    *ngFor="let course of courses"
+  >
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{ course.subject }}
@@ -9,14 +13,20 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>
-      XDDD
+      {{ course.id }}
+      <app-topic-list
+        [panelOpenState]="panelOpenState"
+        courseId="{{ course.id }}"
+      ></app-topic-list>
     </p>
     <mat-action-row>
-      <button mat-button color="accent">EDIT</button>
-      <button mat-button color="accent">DELETE</button>
+      <button mat-button (click)="onAddNewTopic()" color="primary">
+        Add new topic
+      </button>
     </mat-action-row>
+    <app-topic-create *ngIf="isCreateTopic"> </app-topic-create>
   </mat-expansion-panel>
 </mat-accordion>
 <p class="info-text mat-body-1" *ngIf="courses.length <= 0">
-  No courses added yet!
+  No courses added.
 </p>

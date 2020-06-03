@@ -1,0 +1,8 @@
+<mat-list *ngIf="panelOpenState">
+  <mat-list-item *ngFor="let topic of topics">
+    <div matLine>
+      <p style="float: left;">{{ topic.name }}</p>
+      <p style="float: right;">{{ topic.teacher }}</p>
+    </div>
+  </mat-list-item>
+</mat-list>

@@ -9,16 +9,13 @@ import { CourseService } from '../course.service';
   styleUrls: ['./course-create.component.css'],
 })
 export class CourseCreateComponent {
-  enteredTitle = '';
-  enteredContent = '';
-
   constructor(public courseService: CourseService) {}
 
   onAddCourse(form: NgForm) {
     if (form.invalid) {
       return;
     }
-    this.courseService.addCourse(1, form.value.subject, form.value.price);
+    this.courseService.addCourse(form.value.subject, form.value.price);
     form.resetForm();
   }
 }

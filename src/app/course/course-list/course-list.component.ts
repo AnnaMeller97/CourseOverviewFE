@@ -10,34 +10,26 @@ import { CourseService } from '../course.service';
   styleUrls: ['./course-list.component.css'],
 })
 export class CourseListComponent implements OnInit, OnDestroy {
-  // posts = [
-  //   {
-  //     title: 'First post',
-  //     content: 'This is first',
-  //   },
-  //   {
-  //     title: 'Second post',
-  //     content: 'This is second',
-  //   },
-  //   {
-  //     title: 'Third post',
-  //     content: 'This is third',
-  //   },
-  // ];
+  panelOpenState = false;
   courses: Course[] = [];
-  private coursesSub: Subscription;
+  private coursesSubscription: Subscription;
+  isCreateTopic = false;
 
   constructor(public coursesService: CourseService) {}
 
   ngOnInit() {
     this.coursesService.getCourses();
-    this.coursesSub = this.coursesService
+    this.coursesSubscription = this.coursesService
       .getCourseUpdateLisener()
       .subscribe((courses: Course[]) => {
         this.courses = courses;
       });
   }
   ngOnDestroy() {
-    this.coursesSub.unsubscribe();
+    this.coursesSubscription.unsubscribe();
+  }
+
+  onAddNewTopic() {
+    this.isCreateTopic = true;
   }
 }

@@ -7,25 +7,25 @@
         name="subject"
         ngModel
         required
-        placeholder="Post title"
+        placeholder="Course subject"
         #subject="ngModel"
       />
-      <mat-error *ngIf="subject.invalid">Please enter a title</mat-error>
+      <mat-error *ngIf="subject.invalid">Please enter a subject</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <textarea
+      <input
         matInput
-        rows="4"
+        type="number"
         name="price"
         ngModel
         required
-        placeholder="Post contnent"
+        placeholder="Course price"
         #price="ngModel"
-      ></textarea>
-      <mat-error *ngIf="price.invalid">Please enter a content</mat-error>
+      />
+      <mat-error *ngIf="price.invalid">Please enter a price</mat-error>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit">
-      Send
+      Add
     </button>
   </form>
 </mat-card>
