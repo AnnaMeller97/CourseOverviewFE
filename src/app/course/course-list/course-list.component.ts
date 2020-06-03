@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Course } from '../course.model';
 import { CourseService } from '../course.service';
@@ -9,24 +9,16 @@ import { CourseService } from '../course.service';
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.css'],
 })
-export class CourseListComponent implements OnInit, OnDestroy {
+export class CourseListComponent implements OnInit {
   panelOpenState = false;
-  courses: Course[] = [];
-  private coursesSubscription: Subscription;
+
+  courses$: Observable<Course[]>;
   isCreateTopic = false;
 
   constructor(public coursesService: CourseService) {}
 
   ngOnInit() {
-    this.coursesService.getCourses();
-    this.coursesSubscription = this.coursesService
-      .getCourseUpdateLisener()
-      .subscribe((courses: Course[]) => {
-        this.courses = courses;
-      });
-  }
-  ngOnDestroy() {
-    this.coursesSubscription.unsubscribe();
+    this.courses$ = this.coursesService.getCourses();
   }
 
   onAddNewTopic() {

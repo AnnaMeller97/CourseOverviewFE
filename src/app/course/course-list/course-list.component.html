@@ -1,8 +1,8 @@
-<mat-accordion *ngIf="courses.length > 0">
+<mat-accordion>
   <mat-expansion-panel
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false"
-    *ngFor="let course of courses"
+    *ngFor="let course of courses$ | async"
   >
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -27,6 +27,3 @@
     <app-topic-create *ngIf="isCreateTopic"> </app-topic-create>
   </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf="courses.length <= 0">
-  No courses added.
-</p>

@@ -15,7 +15,10 @@ export class CourseCreateComponent {
     if (form.invalid) {
       return;
     }
-    this.courseService.addCourse(form.value.subject, form.value.price);
+    this.courseService
+      .addCourse(form.value.subject, form.value.price)
+      .subscribe();
     form.resetForm();
+    window.location.href = 'http://localhost:4200';
   }
 }
