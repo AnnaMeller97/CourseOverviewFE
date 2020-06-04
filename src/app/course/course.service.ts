@@ -11,6 +11,7 @@ export class CourseService {
 
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>('http://localhost:8080/courses');
+    // .pipe(shareReplay());
   }
 
   addCourse(subject: string, price: number): Observable<any> {

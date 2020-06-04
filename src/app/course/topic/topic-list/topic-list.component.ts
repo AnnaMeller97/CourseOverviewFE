@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
+import { Subscription, Observable } from 'rxjs';
 
 import { Topic } from '../topic.model';
 import { TopicService } from '../topic.service';
@@ -8,28 +8,33 @@ import { TopicService } from '../topic.service';
   selector: 'app-topic-list',
   templateUrl: './topic-list.component.html',
 })
-export class TopicListComponent implements OnInit, OnDestroy {
+export class TopicListComponent implements OnInit, OnChanges {
   @Input() courseId: string;
-  @Input() panelOpenState: boolean;
+  @Input() panelCloseState: boolean;
 
-  topics: Topic[] = [];
-  private topicsSubscription: Subscription;
+  topics$: Observable<Topic[]>;
+  // private topicsSubscription: Subscription;
 
   constructor(public topicService: TopicService) {}
 
-  ngOnInit() {
-    this.topicService.getTopicsByCourseId(this.courseId);
-    this.topicsSubscription = this.topicService
-      .getTopicsUpdateLisener()
-      .subscribe((topics: Topic[]) => {
-        const newTopics = topics.filter(
-          (topic) => topic.courseId.toString() === this.courseId
-        );
-        console.log('newTopics: ', newTopics);
-        this.topics = newTopics;
-      });
+  ngOnChanges() {
+    console.log('panel on change: ', this.panelCloseState);
+
+    console.log('courseId on change: ', this.courseId);
+    this.topics$ = this.topicService.getTopicsByCourseId(this.courseId);
   }
-  ngOnDestroy() {
-    this.topicsSubscription.unsubscribe();
+
+  ngOnInit() {
+    this.topics$ = this.topicService.getTopicsByCourseId(this.courseId);
+    console.log('panel on init: ', this.panelCloseState);
+    // this.topicsSubscription = this.topicService
+    //   .getTopicsUpdateLisener()
+    //   .subscribe((topics: Topic[]) => {
+    //     const newTopics = topics.filter(
+    //       (topic) => topic.courseId.toString() === this.courseId
+    //     );
+    //     console.log('newTopics: ', newTopics);
+    //     this.topics = newTopics;
+    //   });
   }
 }

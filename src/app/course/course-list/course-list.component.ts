@@ -10,7 +10,7 @@ import { CourseService } from '../course.service';
   styleUrls: ['./course-list.component.css'],
 })
 export class CourseListComponent implements OnInit {
-  panelOpenState = false;
+  panelCloseState: true;
 
   courses$: Observable<Course[]>;
   isCreateTopic = false;
@@ -19,6 +19,7 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
     this.courses$ = this.coursesService.getCourses();
+    console.log('TEST: ', this.panelCloseState);
   }
 
   onAddNewTopic() {

@@ -1,6 +1,6 @@
 import { Topic } from './topic.model';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
@@ -21,16 +21,15 @@ export class TopicService {
       });
   }
 
-  getTopicsByCourseId(courseId: string) {
+  getTopicsByCourseId(courseId: string): Observable<Topic[]> {
     const params = new HttpParams().set('courseId', courseId);
-    this.http
-      .get<Topic[]>('http://localhost:8080/topics/', { params })
-      .subscribe((topicData) => {
-        this.topics = this.topics.concat(topicData);
-        this.topicsUpdated.next([...this.topics]);
-        console.log('TopicData: ', topicData);
-        console.log('topics: ', this.topics);
-      });
+    return this.http.get<Topic[]>('http://localhost:8080/topics/', { params });
+    // .subscribe((topicData) => {
+    //   this.topics = this.topics.concat(topicData);
+    //   this.topicsUpdated.next([...this.topics]);
+    //   console.log('TopicData: ', topicData);
+    //   console.log('topics: ', this.topics);
+    // });
   }
 
   getTopicsUpdateLisener() {
