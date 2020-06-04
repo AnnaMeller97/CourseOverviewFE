@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
 
+## TODO
+
+- Adding new topics. For now we can add new topic by `post` request on http://localhost:8080/topic with body like:
+
+```
+{
+	"courseId": 1,
+	"name": "Java +",
+	"teacher": "Jan Nowak"
+}
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

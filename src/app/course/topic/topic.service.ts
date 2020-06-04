@@ -24,12 +24,6 @@ export class TopicService {
   getTopicsByCourseId(courseId: string): Observable<Topic[]> {
     const params = new HttpParams().set('courseId', courseId);
     return this.http.get<Topic[]>('http://localhost:8080/topics/', { params });
-    // .subscribe((topicData) => {
-    //   this.topics = this.topics.concat(topicData);
-    //   this.topicsUpdated.next([...this.topics]);
-    //   console.log('TopicData: ', topicData);
-    //   console.log('topics: ', this.topics);
-    // });
   }
 
   getTopicsUpdateLisener() {

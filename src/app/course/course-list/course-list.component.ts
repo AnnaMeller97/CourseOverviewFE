@@ -19,7 +19,6 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
     this.courses$ = this.coursesService.getCourses();
-    console.log('TEST: ', this.panelCloseState);
   }
 
   onAddNewTopic() {

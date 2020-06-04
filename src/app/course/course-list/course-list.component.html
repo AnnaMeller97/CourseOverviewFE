@@ -1,6 +1,6 @@
 <mat-accordion>
   <mat-expansion-panel
-    (toggle)="(panelCloseState != panelCloseState)"
+    (toggle)="(panelCloseState != this.panelCloseState)"
     *ngFor="let course of courses$ | async"
   >
     <mat-expansion-panel-header>
@@ -12,8 +12,6 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>
-      {{ panelCloseState ? "close" : "open" }}
-      {{ course.id }}
       <app-topic-list
         [panelCloseState]="panelCloseState"
         courseId="{{ course.id }}"

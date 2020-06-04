@@ -5,13 +5,10 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class CourseService {
-  // private coursesUpdated = new Subject<Course[]>();
-
   constructor(private http: HttpClient) {}
 
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>('http://localhost:8080/courses');
-    // .pipe(shareReplay());
   }
 
   addCourse(subject: string, price: number): Observable<any> {
